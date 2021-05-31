@@ -1,0 +1,23 @@
+{
+  "name": "check-pre-push",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "check-pre-push": "./index.js"
+  },
+  "check-pre-push": {
+    "pattern": "^(master|develop){1}$|^(feature|fix|hotfix|release)\/.+$",
+    "errorMsg": "your own error message"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "current-git-branch": "^1.1.0",
+    "cosmiconfig": "^7.0.0"
+  }
+}
