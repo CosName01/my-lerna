@@ -1,27 +1,16 @@
 'use strict';
 
-const {
-    getConf,
-} = require('./getConfig');
+const { print_error } = require("./print");
+const { getConf } = require('./getConfig');
 
-/**
- * validate branch name
- *
- * @param {String} branchName - branch name
- * @return {Boolean} result
- */
 function validateBranchName(branchName) {
-    const {
-        pattern,
-        errorMsg,
-    } = getConf();
+    const { pattern, errorMsg } = getConf('check-pre-push');
     const validBranchNameRegExp = new RegExp(pattern, 'g');
     const result = validBranchNameRegExp.test(branchName);
     if (!result) {
-        console.error(
-            '\x1b[31;1m%s\x1b[0m',
+        print_error(
             `${errorMsg} \n` +
-            `Branch Name: "${branchName}" \n` +
+            `分支名: "${branchName}" \n` +
             `Pattern:"${validBranchNameRegExp.toString()}" \n`
         );
     }
