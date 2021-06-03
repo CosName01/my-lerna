@@ -15,7 +15,7 @@
     "errorMsg": "your own error message"
   },
   "keywords": [],
-  "author": "",
+  "author": "CosName",
   "license": "ISC",
   "dependencies": {
     "cosmiconfig": "^7.0.0",
