@@ -8,11 +8,8 @@
   },
   "bin": {
     "check-branch-name": "node bin/branch.js",
-    "check-commit-msg": "node bin/commit.js"
-  },
-  "check-pre-push": {
-    "pattern": "^(master|develop){1}$|^(feature|fix|hotfix|release)/.+$",
-    "errorMsg": "your own error message"
+    "check-commit-msg": "node bin/commit.js",
+    "check-lint": "node bin/commit.js"
   },
   "keywords": [],
   "author": "CosName",
