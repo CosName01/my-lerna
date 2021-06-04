@@ -1,30 +1,33 @@
-#!/usr/bin/env node
-
 'use strict';
 
-const { validateBranchName } = require('../lib/validateBranchName');
+const { print_info } = require("../lib/print");
+const { getConf } = require('../lib/getConfig');
 const branchName = require('current-git-branch');
-const { print_info, print_error } = require("../lib/print");
 
 const currentBranchName = branchName();
-const SUCCESS_CODE = 0;
-const FAILED_CODE = 1;
 
-// 判断是否为有效git repository
-print_info('check', 'branch');
-if (!currentBranchName) {
-    print_error('不是一个有效的git repository\n');
-    return FAILED_CODE;
+function checkBranch() {
+    return new Promise(function(resolve, reject) {
+        print_info('check', 'branch');
+        // 判断是否为有效git repository
+        if (!currentBranchName) {
+            reject('不是一个有效的git repository\n');
+        }
+        const { pattern, errorMsg } = getConf('check-pre-push');
+        const validBranchNameRegExp = new RegExp(pattern, 'g');
+        const result = validBranchNameRegExp.test(currentBranchName);
+        if (result) {
+            print_info('done');
+            resolve();
+        } else {
+            const err = `${errorMsg} \n` +
+                `分支名: "${currentBranchName}" \n` +
+                `Pattern:"${validBranchNameRegExp.toString()}" \n`;
+            reject(err);
+        }
+    });
 }
-try {
-    const result = validateBranchName(currentBranchName);
-    if (result) {
-        process.exitCode = SUCCESS_CODE;
-        console.log('ok');
-    } else {
-        process.exitCode = FAILED_CODE;
-    }
-} catch (error) {
-    print_error(error.message + '\n');
-    return FAILED_CODE;
-}
+
+module.exports = {
+    checkBranch
+};
