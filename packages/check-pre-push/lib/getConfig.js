@@ -1,7 +1,6 @@
 'use strict';
 const { cosmiconfigSync } = require('cosmiconfig');
 const defaultConfig = require('../config/config');
-
 module.exports = {
     getConf(key= '', startDir = '', endDir = '', clearCaches = false) {
         if (!key) {
