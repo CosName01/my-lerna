@@ -1,15 +1,15 @@
 {
   "name": "check-pre-push",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "check-branch-name": "node bin/branch.js",
-    "check-commit-msg": "node bin/commit.js",
-    "check-lint": "node bin/commit.js"
+    "check-branch-name": "bin/branch.js",
+    "check-commit-msg": "bin/commit.js",
+    "check-lint": "bin/commit.js"
   },
   "keywords": [],
   "author": "CosName",
@@ -21,5 +21,5 @@
   "devDependencies": {
     "eslint": "^7.27.0"
   },
-  "gitHead": "52f6983769d1daeaebbce9f67423c87ccf9e7cea"
+  "gitHead": "c7408cea0bf1e922536c7bb22e2c89652a9d4b4e"
 }
