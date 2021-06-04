@@ -7,9 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "check-branch-name": "bin/branch.js",
-    "check-commit-msg": "bin/commit.js",
-    "check-lint": "bin/commit.js"
+    "check-pre-push": "index.js"
   },
   "keywords": [],
   "author": "CosName",
