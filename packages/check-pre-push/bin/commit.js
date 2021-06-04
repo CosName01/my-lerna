@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 const { getConf } = require('../lib/getConfig');
 
 
-function checkCommitMsg() {
+async function checkCommitMsg() {
     return new Promise(function(resolve, reject) {
         print_info('check', 'commit_message');
         let message = execSync('git show -s --format=%s').toString().trim(); // commit message

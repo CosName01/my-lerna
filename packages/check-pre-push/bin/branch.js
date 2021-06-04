@@ -6,7 +6,7 @@ const branchName = require('current-git-branch');
 
 const currentBranchName = branchName();
 
-function checkBranch() {
+async function checkBranch() {
     return new Promise(function(resolve, reject) {
         print_info('check', 'branch');
         // 判断是否为有效git repository
