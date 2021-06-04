@@ -17,7 +17,6 @@ function checkBranch() {
         const validBranchNameRegExp = new RegExp(pattern, 'g');
         const result = validBranchNameRegExp.test(currentBranchName);
         if (result) {
-            print_info('done');
             resolve();
         } else {
             const err = `${errorMsg} \n` +
