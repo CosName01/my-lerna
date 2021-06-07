@@ -6,6 +6,8 @@ const { getConf } = require('../lib/getConfig');
 
 
 async function checkCommitMsg() {
+    console.log('commit!');
+    console.log(process.argv);
     return new Promise(function(resolve, reject) {
         print_info('check', 'commit_message');
         let message = execSync('git show -s --format=%s').toString().trim(); // commit message

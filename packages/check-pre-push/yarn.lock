@@ -436,6 +436,11 @@
   dependencies:
     "flat-cache" "^3.0.4"
 
+"find-parent-dir@^0.3.1":
+  "integrity" "sha1-xcOFuWhYwzUfldRGyrhmy/nxESU="
+  "resolved" "http://mirrors.idiaoyan.cn/repository/npm-group/find-parent-dir/-/find-parent-dir-0.3.1.tgz"
+  "version" "0.3.1"
+
 "flat-cache@^3.0.4":
   "integrity" "sha1-YbAzgwKy/p+Vfcwy/CqH8cMEixE="
   "resolved" "http://mirrors.idiaoyan.cn/repository/npm-group/flat-cache/-/flat-cache-3.0.4.tgz"
