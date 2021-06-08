@@ -13,13 +13,13 @@ try {
     print_error(err);
 }
 
-const bufferToString = function(buffer) {
+function bufferToString(buffer) {
     const hasToString = buffer && typeof buffer.toString === 'function';
     return hasToString && buffer.toString();
-};
+}
 
 // 获取file内容
-const getFileContent = function(filePath) {
+function getFileContent(filePath) {
     try {
         const buffer = fs.readFileSync(filePath);
         return bufferToString(buffer);
@@ -29,10 +29,10 @@ const getFileContent = function(filePath) {
             throw err;
         }
     }
-};
+}
 
 // 默认获取.git 下的COMMIT_EDITMSG文件
-const getCommitMsg = function(file = 'COMMIT_EDITMSG') {
+function getCommitMsg(file = 'COMMIT_EDITMSG') {
     if (!gitDirectory || !file) {
         return null;
     }
@@ -43,19 +43,7 @@ const getCommitMsg = function(file = 'COMMIT_EDITMSG') {
         message: message,
         sourceFile: file
     };
-};
+}
 
 module.exports = getCommitMsg;
 
-// var validate = function(msgFileOrText) {
-//     var commit = getCommit(msgFileOrText);
-//
-//     if (!validateMessage(commit.message, commit.sourceFile) && commitErrorLogPath) {
-//         fs.appendFileSync(commitErrorLogPath, commit.message + '\n');
-//         process.exit(1);
-//     }
-//
-//     process.exit(0);
-// };
-//
-// validate(commitMsgFileOrText);

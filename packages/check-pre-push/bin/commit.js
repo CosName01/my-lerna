@@ -18,7 +18,7 @@ async function checkCommitMsg() {
             resolve();
         } else {
             if (MERGE_COMMIT_PATTERN.test(messageMain)) {
-                console.log('Merge commit detected.');
+                console.log('🔗 Merge commit detected.');
                 resolve();
             }
             const err = `commit message不符合规范  \n` +
