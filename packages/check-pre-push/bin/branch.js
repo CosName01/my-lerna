@@ -26,7 +26,6 @@ async function checkBranch() {
         }
     });
 }
-
 module.exports = {
     checkBranch
 };
