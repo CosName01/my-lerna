@@ -4,8 +4,9 @@ const { print_info } = require("../lib/print");
 const { getConf } = require('../lib/getConfig');
 const getCommitMsg = require("../lib/getCommitMsg");
 const { commitTag } = getConf('check-pre-push');
-
-const COMMIT_PATTERN = new RegExp(`^(${commitTag.join('|')})(\\([^\\)]*\\))?:`);
+const commit_tags_pattern = commitTag.join('|');
+const commit_pattern_str = `^(${commit_tags_pattern})(\\([^\\)]*\\))?:`;
+const COMMIT_PATTERN = new RegExp(commit_pattern_str);
 const MERGE_COMMIT_PATTERN = /^Merge/;
 
 async function checkCommitMsg() {
