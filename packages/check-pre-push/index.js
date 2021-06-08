@@ -9,8 +9,9 @@ const { checkCommitMsg } = require('./bin/commit.js');
 const SUCCESS_CODE = 0;
 const FAILED_CODE = 1;
 
-function checkSuccess() {
+function checkSuccess(info) {
     console.log('👌');
+    info && console.log(info);
     process.exitCode = SUCCESS_CODE;
 }
 function checkFail(err) {
@@ -21,8 +22,8 @@ function checkFail(err) {
 async function check() {
     const args = process.argv.slice(2).filter(arg => arg.includes('--')); // 参数
     if (args.includes('--msg')) {
-        checkCommitMsg().then(() => {
-            checkSuccess();
+        checkCommitMsg().then((res) => {
+            checkSuccess(res);
         }).catch(err => {
             checkFail(err);
         });
