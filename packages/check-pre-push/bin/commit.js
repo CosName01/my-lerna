@@ -3,7 +3,7 @@
 const { print_info } = require("../lib/print");
 const { getConf } = require('../lib/getConfig');
 const getCommitMsg = require("../lib/getCommitMsg");
-var MERGE_COMMIT_PATTERN = /^Merge /;
+var MERGE_COMMIT_PATTERN = /^Merge/;
 
 
 async function checkCommitMsg() {
@@ -18,14 +18,18 @@ async function checkCommitMsg() {
         if (result) {
             resolve();
         } else {
+            console.log(MERGE_COMMIT_PATTERN);
+            console.log(message);
+            console.log(MERGE_COMMIT_PATTERN.test(message));
             if (MERGE_COMMIT_PATTERN.test(message)) {
                 console.log('Merge commit detected.');
                 resolve();
+            } else {
+                const err = `commit message不符合规范  \n` +
+                    `commit message: "${message}" \n` +
+                    `Pattern: ${commit_pattern}`;
+                reject(err);
             }
-            const err = `commit message不符合规范  \n` +
-                `commit message: "${message}" \n` +
-                `Pattern: ${commit_pattern}`;
-            reject(err);
         }
     });
 }
