@@ -1,78 +1,51 @@
-#!/usr/bin/env node
-
-/**
- * Git COMMIT-MSG hook for validating commit message
- * See https://docs.google.com/document/d/1rk04jEuGfk9kYzfqCuOlPTSJw3hEDZJTBN5E5f1SALo/edit
- *
- * This CLI supports 3 usage ways:
- * 1. Default usage is not passing any argument. It will automatically read from COMMIT_EDITMSG file.
- * 2. Passing a file name argument from git directory. For instance GIT GUI stores commit msg @GITGUI_EDITMSG file.
- * 3. Passing commit message as argument. Useful for testing quickly a commit message from CLI.
- *
- * Installation:
- * >> cd <angular-repo>
- * >> ln -s ../../validate-commit-msg.js .git/hooks/commit-msg
- */
-
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var getGitFolder = require('./getGitFolder');
+const fs = require('fs');
+const path = require('path');
+const getGitFolder = require('./getGitFolder');
+const { print_error } = require("./print");
 
-var validateMessage = require('../index');
-
-var commitMsgFileOrText = process.argv[2];
-var commitErrorLogPath = process.argv[3];
-
-// On running the validation over a text instead of git files such as COMMIT_EDITMSG and GITGUI_EDITMSG
-// is possible to be doing that the from anywhere. Therefore the git directory might not be available.
-var gitDirectory = '.git';
+// 获取.git目录
+let gitDirectory = '.git';
 try {
     gitDirectory = getGitFolder();
-    console.log(gitDirectory);
-    if (!commitErrorLogPath) {
-        commitErrorLogPath = path.resolve(gitDirectory, 'logs/incorrect-commit-msgs');
-    }
 } catch (err) {
-    console.log(err);
+    print_error(err);
 }
 
-var bufferToString = function(buffer) {
-    var hasToString = buffer && typeof buffer.toString === 'function';
-
+const bufferToString = function(buffer) {
+    const hasToString = buffer && typeof buffer.toString === 'function';
     return hasToString && buffer.toString();
 };
 
-var getFileContent = function(filePath) {
+// 获取file内容
+const getFileContent = function(filePath) {
     try {
-        var buffer = fs.readFileSync(filePath);
-
+        const buffer = fs.readFileSync(filePath);
         return bufferToString(buffer);
     } catch (err) {
-        // Ignore these error types because it is most likely validating
-        // a commit from a text instead of a file
-        if (err && err.code !== 'ENOENT' && err.code !== 'ENAMETOOLONG') {
+        // ENOENT: Error No Entry  ENAMETOOLONG: Error Name To Long
+        if (err?.code !== 'ENOENT' && err.code !== 'ENAMETOOLONG') {
             throw err;
         }
     }
 };
 
-var getCommitFromFile = function(file) {
+// 默认获取.git 下的COMMIT_EDITMSG文件
+const getCommitMsg = function(file = 'COMMIT_EDITMSG') {
     if (!gitDirectory || !file) {
         return null;
     }
-
     file = path.resolve(gitDirectory, file);
-    var message = getFileContent(file);
+    const message = getFileContent(file);
 
-    console.log(message);
     return (!message) ? null : {
         message: message,
         sourceFile: file
     };
 };
-getCommitFromFile('COMMIT_EDITMSG');
+
+module.exports = getCommitMsg;
 
 // var validate = function(msgFileOrText) {
 //     var commit = getCommit(msgFileOrText);

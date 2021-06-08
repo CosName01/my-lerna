@@ -1,16 +1,14 @@
 'use strict';
 
 const { print_info } = require("../lib/print");
-const { execSync } = require('child_process');
 const { getConf } = require('../lib/getConfig');
+const getCommitMsg = require("../lib/getCommitMsg");
 
 
 async function checkCommitMsg() {
-    console.log('commit!');
-    console.log(process.argv);
     return new Promise(function(resolve, reject) {
         print_info('check', 'commit_message');
-        let message = execSync('git show -s --format=%s').toString().trim(); // commit message
+        let { message, sourceFile } = getCommitMsg(); // commit message
         const { commitTag } = getConf('check-pre-push');
         const commit_tags_pattern = commitTag.join('|');
         const commit_pattern_str = `^(${commit_tags_pattern})(\\([^\\)]*\\))?:`;
