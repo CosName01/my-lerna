@@ -13,6 +13,9 @@ async function checkCommitMsg() {
         print_info('check', 'commit_message');
         let { message, sourceFile } = getCommitMsg(); // commit message
         const result = COMMIT_PATTERN.test(message);
+        console.log(message.split('\n').filter(function(str) {
+            return str.indexOf('#') !== 0;
+        }).join('\n'));
         if (result) {
             resolve();
         } else {
