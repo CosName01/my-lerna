@@ -2,13 +2,13 @@
 
 const { print_info } = require("../lib/print");
 const { getConf } = require('../lib/getConfig');
-const branchName = require('current-git-branch');
+const isGitAdded = require('current-git-branch');
 
-const currentBranchName = branchName();
+const currentBranchName = isGitAdded();
 
 async function checkBranch() {
     return new Promise(function(resolve, reject) {
-        print_info('check', 'branch');
+        print_info('🔍 check', 'branch');
         // 判断是否为有效git repository
         if (!currentBranchName) {
             reject('不是一个有效的git repository\n');

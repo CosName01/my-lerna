@@ -12,11 +12,11 @@ const FAILED_CODE = 1;
 function checkSuccess(info) {
     console.log('👌');
     info && console.log(info);
-    process.exitCode = SUCCESS_CODE;
+    process.exit(SUCCESS_CODE);
 }
 function checkFail(err) {
     print_error(err);
-    process.exitCode = FAILED_CODE;
+    process.exit(FAILED_CODE);
 }
 
 async function check() {
