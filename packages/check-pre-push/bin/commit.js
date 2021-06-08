@@ -8,7 +8,6 @@ const { commitTag } = getConf('check-pre-push');
 const COMMIT_PATTERN = new RegExp(`^(${commitTag.join('|')})(\\([^\\)]*\\))?:`);
 const MERGE_COMMIT_PATTERN = /^Merge/;
 
-
 async function checkCommitMsg() {
     return new Promise(function(resolve, reject) {
         print_info('check', 'commit_message');
