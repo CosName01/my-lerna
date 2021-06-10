@@ -5,7 +5,7 @@ const { getConf } = require('../lib/getConfig');
 const getCommitMsg = require("../lib/getCommitMsg");
 const { commitTag } = getConf('check-pre-push');
 
-const COMMIT_PATTERN = new RegExp(`^(${commitTag.join('|')})(\\([^)]*\\))?:`);
+const COMMIT_PATTERN = new RegExp(`^(${commitTag.join('|')})(\\([^)]*\\))?(:|：)`);
 const MERGE_COMMIT_PATTERN = /^Merge/;
 
 async function checkCommitMsg() {
@@ -22,7 +22,7 @@ async function checkCommitMsg() {
                 resolve();
             }
             const err = `commit message不符合规范  \n` +
-                `commit message: "${message}" \n` +
+                `commit message: "${messageMain}" \n` +
                 `Pattern: ${COMMIT_PATTERN}`;
             reject(err);
         }
