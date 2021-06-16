@@ -48,6 +48,7 @@ npx husky add .husky/pre-push "npm run check-branch"
 },
 ...
 ```
+除了在package.json中定义，还能以文件 .check-pre-push、.check-pre-push.json 或 .check-pre-push.js 的形式配置check-pre-push。
 
 check-pre-push 内pattern为分支命名约束正则， errorMsg为分支报错提示，commitTag为commit匹配tag。
 
